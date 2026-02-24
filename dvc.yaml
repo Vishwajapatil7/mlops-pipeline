@@ -4,5 +4,18 @@ stages:
     deps:
       - src/train.py
       - data/data.csv
+      - params.yaml
+    params:
+      - train.n_estimators
+      - train.random_state
     outs:
       - models/model.pkl
+
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+      - src/evaluate.py
+      - models/model.pkl
+      - data/data.csv
+    metrics:
+      - metrics.json
