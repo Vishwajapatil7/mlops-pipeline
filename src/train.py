@@ -1,35 +1,32 @@
-import os
 import pandas as pd
 import pickle
-from sklearn.linear_model import LinearRegression
+import yaml
+from sklearn.ensemble import RandomForestRegressor
 
+# Load parameters
+with open("params.yaml", "r") as f:
+    params = yaml.safe_load(f)
 
-def train_model():
-    # Create models folder if not exists
-    os.makedirs("models", exist_ok=True)
+n_estimators = params["train"]["n_estimators"]
+random_state = params["train"]["random_state"]
 
-    # Load data (tracked by DVC)
-    data_path = "data/data.csv"
-    df = pd.read_csv(data_path)
+# Load dataset
+data = pd.read_csv("data/data.csv")
 
-    # Features and target
-    X = df[["area", "bedrooms", "bathrooms"]]
-    y = df["price"]
+# Define features and target
+X = data.drop("price", axis=1)
+y = data["price"]
 
-    # Initialize model
-    model = LinearRegression()
+# Train regression model
+model = RandomForestRegressor(
+    n_estimators=n_estimators,
+    random_state=random_state
+)
 
-    # Train model
-    model.fit(X, y)
+model.fit(X, y)
 
-    # Save trained model
-    model_path = "models/model.pkl"
-    with open(model_path, "wb") as f:
-        pickle.dump(model, f)
+# Save model
+with open("models/model.pkl", "wb") as f:
+    pickle.dump(model, f)
 
-    print("✅ Model trained successfully!")
-    print(f"Model saved at: {model_path}")
-
-
-if __name__ == "__main__":
-    train_model()
+print("✅ Regression model trained successfully!")
