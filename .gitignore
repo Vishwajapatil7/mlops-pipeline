@@ -2,6 +2,10 @@ venv/
 __pycache__/
 *.pyc
 models/
-data/
-.dvc/cache
 .env
+
+# DVC cache
+.dvc/cache
+
+# Ignore actual data but keep dvc metadata
+data/*.csv
