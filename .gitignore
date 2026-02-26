@@ -11,3 +11,4 @@ data/*.csv
 
 # Ignore model artifacts but keep .dvc files
 models/*.pkl
+/metrics.json

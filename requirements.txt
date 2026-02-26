@@ -1,6 +1,5 @@
-pandas
-scikit-learn
 fastapi
 uvicorn
+pandas
+scikit-learn
 dvc
-python-dotenv

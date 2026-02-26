@@ -11,7 +11,7 @@ data = pd.read_csv("data/data.csv")
 X = data.drop("price", axis=1)
 y = data["price"]
 
-# Load trained model
+# Load trained model 
 with open("models/model.pkl", "rb") as f:
     model = pickle.load(f)
 
