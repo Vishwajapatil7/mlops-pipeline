@@ -36,3 +36,11 @@ def predict(area: float, bedrooms: int, bathrooms: int):
     return {
         "predicted_price": float(prediction)
     }
+
+@app.get("/")
+def read_root():
+    return {"message": "MLOps Pipeline Running"}
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
